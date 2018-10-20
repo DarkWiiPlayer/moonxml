@@ -11,7 +11,7 @@ TODO: Write :P
 
 	-- Somewhere in your code
 	mxml = require "moonxml"
-	mxml.html.file "page.moon"
+	mxml.html.file "page.lua"
 
 	-- page.moon
 	html5!
@@ -24,6 +24,8 @@ TODO: Write :P
 				b "Paragraph"
 			p ->
 				print "Sometimes it is just <b>easier</b> to just write HTML."
+	
+	-- moonc page.moon
 
 Warning(s)
 --------------------------------------------------------------------------------

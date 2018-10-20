@@ -152,7 +152,6 @@ do
     return _with_0.print("<!doctype html5>")
   end
 end
-html:file('test.lua')()
 return {
   xml = xml,
   html = html

@@ -84,8 +84,6 @@ with html.environment
 	.html5 = ->
 		.print("<!doctype html5>")
 
-html\file'test.lua'()
-
 {
 	:xml
 	:html

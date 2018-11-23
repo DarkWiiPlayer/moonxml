@@ -1,4 +1,4 @@
-local language = require("xhmoon")
+local language = require('xhmoon')
 local xml = language(function(print, tag, args, inner)
   indent = indent or 0
   local tab = ("\t"):rep(indent)
@@ -106,30 +106,31 @@ do
       return fnc()
     end
   end
-  local file
-  if lua51 then
-    file = function(self, fname)
-      return setfenv(loadfile(fname), self.environment)
-    end
-  else
-    file = function(self, fname, mode)
-      if mode == nil then
-        mode = 't'
-      end
-      return loadfile(fname, mode, self.environment)
-    end
+  local loadmoon
+  loadmoon = function(self, code)
+    return self:loadlua(code, "xhmoon", require('moonscript').to_lua)
+  end
+  local loadmoonfile
+  loadmoonfile = function(self, file)
+    return self:loadluafile(file, require('moonscript').to_lua)
   end
   local _list_0 = {
     xml,
     html
   }
   for _index_0 = 1, #_list_0 do
-    local lan = _list_0[_index_0]
-    local env = lan.environment
-    env.escape = escape
-    lan.hack = hack
-    lan.load = load_file
-    lan.file = file
+    local lang = _list_0[_index_0]
+    do
+      do
+        local _with_0 = lang.environment
+        _with_0.escape = escape
+      end
+      lang.hack = hack
+      lang.load = load_file
+      lang.file = file
+      lang.loadmoon = loadmoon
+      lang.loadmoonfile = loadmoonfile
+    end
   end
 end
 local _list_0 = {
@@ -137,9 +138,9 @@ local _list_0 = {
   xml
 }
 for _index_0 = 1, #_list_0 do
-  local lan = _list_0[_index_0]
+  local lang = _list_0[_index_0]
   do
-    local _with_0 = lan.environment
+    local _with_0 = lang.environment
     _with_0.text = function(self)
       local id = ("\t"):rep(_with_0.indent)
       return print(_with_0.escape(id .. self))

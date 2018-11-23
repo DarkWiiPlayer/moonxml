@@ -1,4 +1,4 @@
-language = require "xhmoon"
+language = require 'xhmoon'
 
 xml = language (print, tag, args, inner) ->
 	export indent = indent or 0
@@ -62,20 +62,21 @@ do
 				upvaluejoin(fnc, 1, (-> aaaa!), 1) -- Set environment
 			return fnc!
 
-	file = if lua51 then
-		(fname) => setfenv loadfile(fname), @environment
-	else
-		(fname, mode='t') => loadfile(fname, mode, @environment)
+	loadmoon = (code) => @loadlua(code, "xhmoon", require'moonscript'.to_lua)
+	loadmoonfile = (file) => @loadluafile(file, require'moonscript'.to_lua)
+	
+	for lang in *{xml, html}
+		with lang
+			with .environment
+				.escape = escape
+			.hack = hack
+			.load = load_file
+			.file = file
+			.loadmoon = loadmoon
+			.loadmoonfile = loadmoonfile
 
-	for lan in *{xml, html}
-		env = lan.environment
-		env.escape = escape
-		lan.hack = hack
-		lan.load = load_file
-		lan.file = file
-
-for lan in *{html, xml}
-	with lan.environment
+for lang in *{html, xml}
+	with lang.environment
 		.text = =>
 			id = ("\t")\rep .indent
 			print .escape id..@

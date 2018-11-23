@@ -11,7 +11,7 @@ return {
 		url = "darkwiiplayer.com";
 		features = {
 			"master", "indentation" -- etc.
-		}
+		};
 		message = "Lua is awesome ♥";
 	},
 }

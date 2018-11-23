@@ -11,7 +11,7 @@ TODO: Write :P
 
 	-- Somewhere in your code
 	mxml = require "moonxml"
-	mxml.html.file "page.lua"
+	mxml.html.loadmoonfile "page.moon"
 
 	-- page.moon
 	html5!
@@ -24,8 +24,6 @@ TODO: Write :P
 				b "Paragraph"
 			p ->
 				print "Sometimes it is just <b>easier</b> to just write HTML."
-	
-	-- moonc page.moon
 
 Warning(s)
 --------------------------------------------------------------------------------
@@ -71,6 +69,11 @@ After submitting a larger change, feel free to add your name to the
 
 Changelog
 --------------------------------------------------------------------------------
+
+### 3.1.0
+- Add method to load moonscript from file or string directly as a moonxml
+	generator.
+- Switch to xhmoon 1.1.0 to get `loadlua` and `loadluafile` methods
 
 ### 3.0.0
 

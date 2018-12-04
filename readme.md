@@ -7,23 +7,56 @@ Heavily inspired by the HTML generator syntax in [Lapis][lapis]
 Usage
 --------------------------------------------------------------------------------
 
-TODO: Write :P
+Modifying function environments in Lua is tricky, which is why MoonXML tries to
+avoid it whenever possible. Therefore the prefered way to load templates is from
+their own `.moon` file. This works like this:
 
-	-- Somewhere in your code
-	mxml = require "moonxml"
-	mxml.html.loadmoonfile "page.moon"
+Somewhere in your code:
 
-	-- page.moon
+	-- This works fine with moonscript, but this example shows how it can also be
+	-- used from within Lua as long as moonscript is installed
+	local mxml = require "moonxml"
+	local temp = mxml.html:loadmoonfile "page.moon"
+	temp('My Page')
+
+`page.moon`:
+
+	title_text = ...
 	html5!
 	html ->
-		head!
+		head ->
+			title title_text or 'Page'
 		body ->
 			h1 "Hello World"
 			p ->
 				print escape "This is a"
 				b "Paragraph"
 			p ->
-				print "Sometimes it is just <b>easier</b> to just write HTML."
+				print "Sometimes it is just <b>easier</b> to just write HTML inline."
+
+This would produce HTML code similar to the following
+
+	<!doctype html>
+	<html>
+		<head>
+			<title>My Page</title>
+		</head>
+		<body>
+			<p>
+				This is a
+				<b>Paragraph</b>
+			</p>
+			<p>
+				Sometimes it is just <b>easier</b> to just write HTML inline.
+			</p>
+		</body>
+	</html>
+
+Line-breaks and/or indentation may differ;
+the exact behavior is still not completely optimal and may change in the future,
+possibly to include no indentation at all
+(thus requiring an external linter if human-readability is desired).
+Feedback regarding this issue is very welcome!
 
 Warning(s)
 --------------------------------------------------------------------------------
@@ -69,6 +102,9 @@ After submitting a larger change, feel free to add your name to the
 
 Changelog
 --------------------------------------------------------------------------------
+
+### Development
+- Improve Readme file
 
 ### 3.1.0
 - Add method to load moonscript from file or string directly as a moonxml

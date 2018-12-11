@@ -46,7 +46,7 @@ do
 		["'"]: '&#039;'
 	}
 	escape = (str) ->
-		(=>@) tostring(str)\gsub [[[<>&]'"]], escapes
+		(tostring(str)\gsub ".", escapes)
 
 	hack = if lua51 then
 		(fnc) =>

@@ -1,5 +1,5 @@
 package = "moonxml"
-version = "dev-3"
+version = "dev-4"
 source = {
    url = "git://github.com/DarkWiiPlayer/moonxml.git";
 }
@@ -15,5 +15,8 @@ build = {
    type = "builtin",
    modules = {
      moonxml = 'xml.lua'
-   }
+   };
+	 install = {
+		 bin = { "bin/moonxml" };
+	 };
 }

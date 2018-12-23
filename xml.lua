@@ -1,7 +1,5 @@
 local language = require('xhmoon')
 local xml = language(function(print, tag, args, inner)
-  indent = indent or 0
-  local tab = ("\t"):rep(indent)
   args = table.concat((function()
     local _accum_0 = { }
     local _len_0 = 1
@@ -12,13 +10,11 @@ local xml = language(function(print, tag, args, inner)
     return _accum_0
   end)(), ' ')
   if inner then
-    print(tab .. "<" .. tostring(tag) .. " " .. tostring(args) .. ">")
-    indent = indent + 1
+    print("<" .. tostring(tag) .. " " .. tostring(args) .. ">")
     local _ = inner and inner()
-    indent = indent - 1
-    return print(tab .. "</" .. tostring(tag) .. ">")
+    return print("</" .. tostring(tag) .. ">")
   else
-    return print(tab .. "<" .. tostring(tag) .. " " .. tostring(args) .. "/>")
+    return print("<" .. tostring(tag) .. " " .. tostring(args) .. "/>")
   end
 end)
 local html
@@ -51,7 +47,6 @@ do
     void = _tbl_0
   end
   html = language(function(print, tag, args, inner)
-    indent = indent or 0
     local open = {
       tag
     }
@@ -59,15 +54,12 @@ do
       table.insert(open, tostring(key) .. "='" .. tostring(value) .. "'")
     end
     open = table.concat(open, " ")
-    local tab = ("\t"):rep(indent)
     if void[tag:lower()] then
-      return print(tab .. "<" .. tostring(open) .. ">")
+      return print("<" .. tostring(open) .. ">")
     else
-      print(tab .. "<" .. tostring(open) .. ">")
-      indent = indent + 1
+      print("<" .. tostring(open) .. ">")
       local _ = inner and inner()
-      indent = indent - 1
-      return print(tab .. "</" .. tostring(tag) .. ">")
+      return print("</" .. tostring(tag) .. ">")
     end
   end)
 end
@@ -82,9 +74,7 @@ do
   }
   local escape
   escape = function(str)
-    return (function(self)
-      return self
-    end)(tostring(str):gsub([[[<>&]'"]], escapes))
+    return (tostring(str):gsub(".", escapes))
   end
   local hack
   if lua51 then
@@ -142,8 +132,7 @@ for _index_0 = 1, #_list_0 do
   do
     local _with_0 = lang.environment
     _with_0.text = function(self)
-      local id = ("\t"):rep(_with_0.indent)
-      return print(_with_0.escape(id .. self))
+      return print(_with_0.escape(self))
     end
   end
 end

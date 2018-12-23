@@ -1,17 +1,13 @@
 language = require 'xhmoon'
 
 xml = language (print, tag, args, inner) ->
-	export indent = indent or 0
-	tab = ("\t")\rep indent
 	args = table.concat ['#{key}="#{value}"' for key, value in pairs args], ' '
 	if inner
-		print tab.."<#{tag} #{args}>"
-		indent = indent + 1
+		print "<#{tag} #{args}>"
 		inner and inner!
-		indent = indent - 1
-		print tab.."</#{tag}>"
+		print "</#{tag}>"
 	else
-		print tab.."<#{tag} #{args}/>"
+		print "<#{tag} #{args}/>"
 
 html = do -- TODO: Implement :P
 	void = {key,true for key in *{
@@ -21,20 +17,16 @@ html = do -- TODO: Implement :P
 		"param", "source", "track", "wbr"
 	}}
 	language (print, tag, args, inner) ->
-		export indent = indent or 0
 		open = {tag}
 		for key, value in pairs args do
 			table.insert open, "#{key}='#{value}'"
 		open = table.concat(open, " ")
-		tab = ("\t")\rep indent
 		if void[tag\lower!]
-			print tab.."<#{open}>"
+			print "<#{open}>"
 		else
-			print tab.."<#{open}>"
-			indent = indent + 1
+			print "<#{open}>"
 			inner and inner!
-			indent = indent - 1
-			print tab.."</#{tag}>"
+			print "</#{tag}>"
 
 do
 	lua51 = _VERSION == 'Lua 5.1'
@@ -78,8 +70,7 @@ do
 for lang in *{html, xml}
 	with lang.environment
 		.text = =>
-			id = ("\t")\rep .indent
-			print .escape id..@
+			print .escape @
 
 with html.environment
 	.html5 = ->

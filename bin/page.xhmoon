@@ -1,0 +1,6 @@
+html5!
+
+html ->
+	body ->
+		h1 "Hello World!"
+		p "Doing some stuff :)"

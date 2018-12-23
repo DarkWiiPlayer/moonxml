@@ -105,6 +105,8 @@ Changelog
 
 ### Development
 - Improve Readme file
+- Add rudimentary executable
+- Update rockspec to v4
 
 ### 3.1.0
 - Add method to load moonscript from file or string directly as a moonxml

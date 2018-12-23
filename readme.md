@@ -52,11 +52,8 @@ This would produce HTML code similar to the following
 		</body>
 	</html>
 
-Line-breaks and/or indentation may differ;
-the exact behavior is still not completely optimal and may change in the future,
-possibly to include no indentation at all
-(thus requiring an external linter if human-readability is desired).
-Feedback regarding this issue is very welcome!
+Note that the resulting code will not be indented as in the example
+and html tags will always be on their own line.
 
 Warning(s)
 --------------------------------------------------------------------------------
@@ -107,6 +104,7 @@ Changelog
 - Improve Readme file
 - Add rudimentary executable
 - Update rockspec to v4
+- Removed indentation (Wo... hooo?)
 
 ### 3.1.0
 - Add method to load moonscript from file or string directly as a moonxml

@@ -10,7 +10,7 @@ return {
 		email = "darkwiiplayer@hotmail.com";
 		url = "darkwiiplayer.com";
 		features = {
-			"master", "indentation" -- etc.
+			"master" -- etc.
 		};
 		message = "Lua is awesome ♥";
 	},

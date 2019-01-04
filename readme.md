@@ -100,11 +100,12 @@ After submitting a larger change, feel free to add your name to the
 Changelog
 --------------------------------------------------------------------------------
 
-### Development
+### Development (3.2.0)
 - Improve Readme file
 - Add rudimentary executable
 - Update rockspec to v4
 - Removed indentation (Wo... hooo?)
+- Fix `hack` not passing additional arguments
 
 ### 3.1.0
 - Add method to load moonscript from file or string directly as a moonxml

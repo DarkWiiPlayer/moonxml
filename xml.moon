@@ -41,19 +41,19 @@ do
 		(tostring(str)\gsub ".", escapes)
 
 	hack = if lua51 then
-		(fnc) =>
+		(fnc, ...) =>
 			if not type(fnc)=='function'
 				error 'wrong argument, expecting function, got '..type(fnc), 2
 			setfenv(fnc, @environment)
-			return fnc!
+			return fnc(...)
 	else
-		(fnc) =>
+		(fnc, ...) =>
 			assert(type(fnc)=='function', 'wrong argument, expecting function, got '..type(fnc))
 			do
 				upvaluejoin = debug.upvaluejoin
 				_ENV = @environment
 				upvaluejoin(fnc, 1, (-> aaaa!), 1) -- Set environment
-			return fnc!
+			return fnc(...)
 
 	loadmoon = (code) => @loadlua(code, "xhmoon", require'moonscript'.to_lua)
 	loadmoonfile = (file) => @loadluafile(file, require'moonscript'.to_lua)

@@ -1,7 +1,7 @@
 language = require 'xhmoon'
 
 xml = language (print, tag, args, inner) ->
-	args = table.concat ['#{key}="#{value}"' for key, value in pairs args], ' '
+	args = table.concat ["#{key}=\"#{value}\"" for key, value in pairs args], ' '
 	if inner
 		print "<#{tag} #{args}>"
 		inner and inner!

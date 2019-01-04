@@ -4,7 +4,7 @@ local xml = language(function(print, tag, args, inner)
     local _accum_0 = { }
     local _len_0 = 1
     for key, value in pairs(args) do
-      _accum_0[_len_0] = '#{key}="#{value}"'
+      _accum_0[_len_0] = tostring(key) .. "=\"" .. tostring(value) .. "\""
       _len_0 = _len_0 + 1
     end
     return _accum_0

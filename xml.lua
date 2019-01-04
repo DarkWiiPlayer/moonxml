@@ -79,7 +79,9 @@ do
   local hack
   if lua51 then
     hack = function(self, fnc)
-      assert(type(fnc) == 'function', 'wrong argument, expecting function, got ' .. type(fnc))
+      if not type(fnc) == 'function' then
+        error('wrong argument, expecting function, got ' .. type(fnc), 2)
+      end
       setfenv(fnc, self.environment)
       return fnc()
     end

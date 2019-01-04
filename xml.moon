@@ -48,7 +48,8 @@ do
 			return fnc(...)
 	else
 		(fnc, ...) =>
-			assert(type(fnc)=='function', 'wrong argument, expecting function, got '..type(fnc))
+			if not type(fnc)=='function'
+				error 'wrong argument, expecting function, got '..type(fnc), 2
 			do
 				upvaluejoin = debug.upvaluejoin
 				_ENV = @environment

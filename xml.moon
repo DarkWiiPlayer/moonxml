@@ -42,7 +42,8 @@ do
 
 	hack = if lua51 then
 		(fnc) =>
-			assert(type(fnc)=='function', 'wrong argument, expecting function, got '..type(fnc))
+			if not type(fnc)=='function'
+				error 'wrong argument, expecting function, got '..type(fnc), 2
 			setfenv(fnc, @environment)
 			return fnc!
 	else

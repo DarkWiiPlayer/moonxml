@@ -100,7 +100,9 @@ After submitting a larger change, feel free to add your name to the
 Changelog
 --------------------------------------------------------------------------------
 
-### Development (3.2.0)
+### Development (3.3.0)
+
+### 3.2.0
 - Improve Readme file
 - Add rudimentary executable
 - Update rockspec to v4

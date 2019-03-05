@@ -101,12 +101,15 @@ Changelog
 --------------------------------------------------------------------------------
 
 ### Development (3.3.0)
+- Remove moonhtml `html5` function
+	Because functions inherited from other functions keep their original
+	environment.
 
 ### 3.2.0
 - Improve Readme file
 - Add rudimentary executable
 - Update rockspec to v4
-- Removed indentation (Wo... hooo?)
+- Remove indentation (Wo... hooo?)
 - Fix `hack` not passing additional arguments
 
 ### 3.1.0

@@ -74,10 +74,6 @@ for lang in *{html, xml}
 		.text = =>
 			print .escape @
 
-with html.environment
-	.html5 = ->
-		.print("<!doctype html5>")
-
 {
 	:xml
 	:html

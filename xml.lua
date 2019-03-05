@@ -140,12 +140,6 @@ for _index_0 = 1, #_list_0 do
     end
   end
 end
-do
-  local _with_0 = html.environment
-  _with_0.html5 = function()
-    return _with_0.print("<!doctype html5>")
-  end
-end
 return {
   xml = xml,
   html = html

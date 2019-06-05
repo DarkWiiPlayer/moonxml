@@ -14,7 +14,7 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-     moonxml = 'xml.lua'
+     moonxml = 'moonxml.lua'
    };
 	 install = {
 		 bin = { "bin/moonxml" };

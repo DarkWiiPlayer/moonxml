@@ -104,6 +104,8 @@ Changelog
 - Remove moonhtml `html5` function
 	Because functions inherited from other functions keep their original
 	environment.
+- Switch to Lua file (delete moonscript file)
+- Rename source file from `xml.lua` to `moonxml.lua` for consistency
 
 ### 3.2.0
 - Improve Readme file

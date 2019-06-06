@@ -106,6 +106,7 @@ Changelog
 	environment.
 - Switch to Lua file (delete moonscript file)
 - Rename source file from `xml.lua` to `moonxml.lua` for consistency
+- Add tests
 
 ### 3.2.0
 - Improve Readme file

@@ -1,5 +1,5 @@
 package = "moonxml"
-version = "dev-4"
+version = "dev-1"
 source = {
    url = "git://github.com/DarkWiiPlayer/moonxml.git";
 }

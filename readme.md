@@ -100,7 +100,7 @@ After submitting a larger change, feel free to add your name to the
 Changelog
 --------------------------------------------------------------------------------
 
-### Development (3.3.0)
+### 3.3.0
 - Remove moonhtml `html5` function
 	Because functions inherited from other functions keep their original
 	environment.

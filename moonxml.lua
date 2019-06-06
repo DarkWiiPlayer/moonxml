@@ -19,33 +19,12 @@ local xml = language(function(print, tag, args, inner)
 end)
 local html
 do
-  local void
-  do
-    local _tbl_0 = { }
-    local _list_0 = {
-      "area",
-      "base",
-      "br",
-      "col",
-      "command",
-      "embed",
-      "hr",
-      "img",
-      "input",
-      "keygen",
-      "link",
-      "meta",
-      "param",
-      "source",
-      "track",
-      "wbr"
-    }
-    for _index_0 = 1, #_list_0 do
-      local key = _list_0[_index_0]
-      _tbl_0[key] = true
-    end
-    void = _tbl_0
-  end
+  local void = {
+		area = true, base = true, br = true, col = true,
+		command = true, embed = true, hr = true, img = true,
+		input = true, keygen = true, link = true, meta = true,
+		param = true, source = true, track = true, wbr = true
+	}
   html = language(function(print, tag, args, inner)
     local open = {
       tag
@@ -100,46 +79,26 @@ do
       return fnc(...)
     end
   end
-  local loadmoon
-  loadmoon = function(self, code)
+
+  local function loadmoon(self, code)
     return self:loadlua(code, "xhmoon", require('moonscript').to_lua)
   end
-  local loadmoonfile
-  loadmoonfile = function(self, file)
+
+  local function loadmoonfile(self, file)
     return self:loadluafile(file, require('moonscript').to_lua)
   end
-  local _list_0 = {
-    xml,
-    html
-  }
-  for _index_0 = 1, #_list_0 do
-    local lang = _list_0[_index_0]
-    do
-      do
-        local _with_0 = lang.environment
-        _with_0.escape = escape
-      end
-      lang.hack = hack
-      lang.load = load_file
-      lang.file = file
-      lang.loadmoon = loadmoon
-      lang.loadmoonfile = loadmoonfile
-    end
-  end
+
+	for idx, language in ipairs{xml, html} do
+		language.environment.escape = escape
+
+		language.hack = hack
+		language.load = load_file
+		language.file = file
+		language.loadmoon = loadmoon
+		language.loadmoonfile = loadmoonfile
+	end
 end
-local _list_0 = {
-  html,
-  xml
-}
-for _index_0 = 1, #_list_0 do
-  local lang = _list_0[_index_0]
-  do
-    local _with_0 = lang.environment
-    _with_0.text = function(self)
-      return print(_with_0.escape(self))
-    end
-  end
-end
+
 return {
   xml = xml,
   html = html

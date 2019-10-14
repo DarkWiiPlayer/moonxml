@@ -1,7 +1,8 @@
 package = "moonxml"
-version = "dev-2"
+version = "3.2.2-1"
 source = {
 	url = "git://github.com/DarkWiiPlayer/moonxml.git";
+	tag = 'v3.2.2';
 }
 description = {
 	homepage = "https://github.com/DarkWiiPlayer/moonxml";
@@ -9,7 +10,8 @@ description = {
 }
 dependencies = {
 	"lua >= 5.1";
-	"xhmoon";
+	"xhmoon ~> 2.0";
+	"xhmoon >= 2.0.1";
 }
 build = {
 	type = "builtin",

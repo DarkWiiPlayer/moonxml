@@ -10,7 +10,9 @@ describe 'moonxml', ->
 			it 'should exist and be a table', ->
 				assert.is.table moonxml[language]
 
-			setup -> export lang = moonxml[language]
+			setup ->
+				export lang = moonxml[language]
+				lang.environment.print = stub.new()
 
 			it 'should have a loadmoon function', ->
 				assert.is.function lang.loadmoon
@@ -24,7 +26,9 @@ describe 'moonxml', ->
 				assert.is.function lang\loadmoon '-> "test"'
 
 			it 'should fail on invalid moonscript', ->
-				assert.is.nil lang\loadmoon '->-><- yolo#'
+				res, err = lang\loadmoon '->-><- yolo#'
+				assert.is.nil res
+				assert.is.string err
 
 			it 'should load templates from files', ->
 				assert.is.function lang\loadmoonfile 'example.moonxml'
@@ -32,3 +36,21 @@ describe 'moonxml', ->
 			it 'should fail to load non-existant files', ->
 				assert.has.errors (-> lang\loadmoonfile 'foo.bar'),
 					'foo.bar: No such file or directory'
+			
+			it 'should escape text', ->
+				lang\loadlua('p "<b>"')()
+				with assert.stub(lang.environment.print)
+					.was_not_called_with('<b>')
+					.was_called_with('&lt;b&gt;')
+
+			describe 'derived languages', ->
+				setup ->
+					export lang = moonxml[language]
+					export lang = lang\derive!
+					lang.environment.print = stub.new!
+
+				it 'should escape text', ->
+					lang\loadlua('p "<b>"')()
+					with assert.stub(lang.environment.print)
+						.was_not_called_with('<b>')
+						.was_called_with('&lt;b&gt;')

@@ -46,6 +46,7 @@ local html do
 	}
 
 	html = language(function(environment, tag, args, inner)
+		tag = tag:lower()
 		local open = {
 			tag
 		}
@@ -53,7 +54,7 @@ local html do
 			table.insert(open, tostring(key) .. "='" .. tostring(value) .. "'")
 		end
 		open = table.concat(open, " ")
-		if void[tag:lower()] then
+		if void[tag] then
 			return environment.print("<" .. tostring(open) .. ">")
 		else
 			environment.print("<" .. tostring(open) .. ">")

@@ -9,7 +9,7 @@ description = {
 }
 dependencies = {
 	"lua >= 5.1";
-	"xhmoon >= 2.0.1";
+	"xhmoon";
 }
 build = {
 	type = "builtin",

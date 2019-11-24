@@ -1,5 +1,7 @@
 -- vim: set noexpandtab :miv --
 
+local language = require('xhmoon')
+
 local escapes = {
 	['&'] = '&amp;',
 	['<'] = '&lt;',
@@ -13,7 +15,6 @@ local function _escape(str)
 	return (tostring(str):gsub(".", escapes))
 end
 
-local language = require('xhmoon')
 local xml = language(function(environment, tag, args, inner)
 	args = table.concat((function()
 		local _accum_0 = { }
@@ -35,6 +36,9 @@ local xml = language(function(environment, tag, args, inner)
 	end
 end, function(_ENV)
 	escape = _escape
+	svg = function(...)
+		node('svg', { xmlns="http://www.w3.org/2000/svg" }, ...)
+	end
 end)
 
 local html do

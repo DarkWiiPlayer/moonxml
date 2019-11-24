@@ -1,3 +1,25 @@
 #!/usr/bin/env lua
 
-require[[moonxml]].html:loadmoon(io.read[[*a]])()
+local input, output = ...
+
+if input then
+	input = io.open(input)
+else
+	input = io.stdin
+end
+
+if output then
+	output = io.open(output, "w")
+else
+	output = io.stdout
+end
+
+local xml = require[[moonxml]].xml
+xml.environment.print = function(...)
+	output:write(...)
+end
+xml:loadmoon(input:read[[*a]])()
+output:write('\n')
+
+input:close()
+output:close()

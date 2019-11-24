@@ -101,6 +101,7 @@ Changelog
 --------------------------------------------------------------------------------
 
 ### Development
+- Change `moonxml` to pass additional arguments to the template
 - Improve `moonxml` script to accept file parameters
 - `svg` tag automatically adds 'xmlns' attribute
 - Make all HTML tags lowercase

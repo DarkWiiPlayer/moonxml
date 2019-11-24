@@ -2,13 +2,13 @@
 
 local input, output = ...
 
-if input then
+if input and input~='-' then
 	input = io.open(input)
 else
 	input = io.stdin
 end
 
-if output then
+if output and output~='-' then
 	output = io.open(output, "w")
 else
 	output = io.stdout
@@ -18,7 +18,7 @@ local xml = require[[moonxml]].xml
 xml.environment.print = function(...)
 	output:write(...)
 end
-xml:loadmoon(input:read[[*a]])()
+xml:loadmoon(input:read[[*a]])(select(3, ...))
 output:write('\n')
 
 input:close()

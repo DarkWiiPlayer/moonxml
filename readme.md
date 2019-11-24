@@ -100,15 +100,21 @@ After submitting a larger change, feel free to add your name to the
 Changelog
 --------------------------------------------------------------------------------
 
-### Development (3.3.0)
+### Development
 - Improve `moonxml` script to accept file parameters
 - `svg` tag automatically adds 'xmlns' attribute
+- Make all HTML tags lowercase
+
+### 3.2.2
+- Switch to xhmoon 2
+
+### 3.2.1
+- Switch to Lua file (delete moonscript file)
+- Add tests
 - Remove moonhtml `html5` function
 	Because functions inherited from other functions keep their original
 	environment.
-- Switch to Lua file (delete moonscript file)
-- Rename source file from `xml.lua` to `moonxml.lua` for consistency
-- Add tests
+	Note: this is no longer a problem as of xhmoon 2
 
 ### 3.2.0
 - Improve Readme file

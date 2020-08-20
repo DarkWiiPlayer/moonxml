@@ -55,6 +55,18 @@ This would produce HTML code similar to the following
 Note that the resulting code will not be indented as in the example
 and html tags will always be on their own line.
 
+### Special functions:
+
+#### HTML:
+
+`html5`, `html4` and `xhtml` add a doctype (these should go at the top, duh)
+
+#### XML:
+
+`xml(version[, encoding])` Adds that `<?xml ?>` thingy I forgot the name of
+
+`svg` Creates an SVG tag, but adds the `xmlns` automatically
+
 Warning(s)
 --------------------------------------------------------------------------------
 
@@ -105,6 +117,8 @@ Changelog
 - Improve `moonxml` script to accept file parameters
 - `svg` tag automatically adds 'xmlns' attribute
 - Make all HTML tags lowercase
+- Add html5, html4 and xhtml doctype functions
+- Add xml function
 
 ### 3.2.2
 - Switch to xhmoon 2

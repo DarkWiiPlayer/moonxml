@@ -69,6 +69,14 @@ local html do
 		end
 	end, function(_ENV)
 		escape = _escape
+
+		--- Renders a HTML5 doctype in place.
+		-- @function html5
+		-- @usage
+		-- 	html5()
+		function html5()
+			print('<!doctype html>')
+		end
 	end)
 end
 

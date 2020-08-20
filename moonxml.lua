@@ -16,28 +16,29 @@ local function _escape(str)
 end
 
 local xml = language(function(environment, tag, args, inner)
-	args = table.concat((function()
-		local _accum_0 = { }
-		local _len_0 = 1
-		for key, value in pairs(args) do
-			_accum_0[_len_0] = tostring(key) .. "=\"" .. tostring(value) .. "\""
-			_len_0 = _len_0 + 1
-		end
-		return _accum_0
-	end)(), ' ')
+	local acc = {}
+	for key, value in pairs(args) do
+		table.insert(acc, tostring(key) .. '="' .. tostring(value) .. '"')
+	end
+	args = table.concat(acc, ' ')
 	if inner then
 		environment.print("<" .. tostring(tag) .. " " .. tostring(args) .. ">")
-		if inner then
-			inner(environment.escape)
-		end
+		inner(environment.escape)
 		return environment.print("</" .. tostring(tag) .. ">")
 	else
 		return environment.print("<" .. tostring(tag) .. " " .. tostring(args) .. "/>")
 	end
 end, function(_ENV)
 	escape = _escape
-	svg = function(...)
+	function svg(...)
 		node('svg', { xmlns="http://www.w3.org/2000/svg" }, ...)
+	end
+	function xml(version, encoding)
+		if encoding then
+			print(([[<?xml version="%s" encoding="%s"?>]]):format(version, encoding))
+		else
+			print(([[<?xml version="%s"?>]]):format(version))
+		end
 	end
 end)
 
@@ -70,12 +71,14 @@ local html do
 	end, function(_ENV)
 		escape = _escape
 
-		--- Renders a HTML5 doctype in place.
-		-- @function html5
-		-- @usage
-		-- 	html5()
 		function html5()
-			print('<!doctype html>')
+			print [[<!doctype html>]]
+		end
+		function html4()
+			print [[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">]]
+		end
+		function xhtml()
+			print [[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">]]
 		end
 	end)
 end

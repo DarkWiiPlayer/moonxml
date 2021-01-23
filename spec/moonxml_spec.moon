@@ -1,4 +1,4 @@
-package.path = './?.lua;'..package.path
+package.path = '?/init.lua;?.lua;'..package.path
 moonxml = require 'moonxml'
 
 describe 'moonxml', ->
@@ -54,3 +54,9 @@ describe 'moonxml', ->
 					with assert.stub(lang.environment.print)
 						.was_not_called_with('<b>')
 						.was_called_with('&lt;b&gt;')
+
+			describe 'buffered languages', ->
+				it 'should buffer text', ->
+					buffered = lang\buffered!
+					buffered\loadlua('h1("foo")')()
+					assert.equal "<h1>foo</h1>", buffered.buffer\concat!

@@ -10,6 +10,7 @@ description = {
 dependencies = {
 	"lua >= 5.1";
 	"xhmoon";
+	"strbuffer";
 }
 build = {
 	type = "builtin",

@@ -17,12 +17,16 @@ end
 
 local xml = language(function(environment, tag, args, inner)
 	local acc = {}
-	for key, value in pairs(args) do
-		table.insert(acc, tostring(key) .. '="' .. tostring(value) .. '"')
+	if args[1] then
+		for key, value in pairs(args) do
+			table.insert(acc, tostring(key) .. '="' .. tostring(value) .. '"')
+		end
+		args = " " .. table.concat(acc, ' ')
+	else
+		args = ""
 	end
-	args = table.concat(acc, ' ')
 	if inner then
-		environment.print("<" .. tostring(tag) .. " " .. tostring(args) .. ">")
+		environment.print("<" .. tostring(tag) .. tostring(args) .. ">")
 		inner(environment.escape)
 		return environment.print("</" .. tostring(tag) .. ">")
 	else
@@ -126,6 +130,19 @@ do
 		language.loadmoonfile = loadmoonfile
 	end
 end
+
+local function buffered(self, char)
+	return self:derive(function(env, lang)
+		local buffer = require 'strbuffer' (char)
+		lang.buffer = buffer
+		function env.print(...)
+			return buffer:append(...)
+		end
+	end)
+end
+
+xml.buffered = buffered
+html.buffered = buffered
 
 return {
 	xml = xml,
